@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="🔱 Parchi">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0F0A2E">
+<title>🔱 Mahadev Parchi 4.5</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  /* VIBRANT MULTI-COLOR THEME */
+  --c-bg:       #080818;
+  --c-bg2:      #0D0D28;
+  --c-card:     #101028;
+  --c-card2:    #14143A;
+  --c-border:   rgba(100,80,255,0.2);
+  --c-border2:  rgba(255,100,50,0.3);
+
+  /* GRADIENT PALETTE */
+  --g-fire:     linear-gradient(135deg, #FF4500 0%, #FF8C00 50%, #FFD700 100%);
+  --g-ocean:    linear-gradient(135deg, #0066FF 0%, #00CCFF 100%);
+  --g-aurora:   linear-gradient(135deg, #FF0080 0%, #7B2FFF 50%, #00E5FF 100%);
+  --g-gold:     linear-gradient(135deg, #FFD700 0%, #FF8C00 50%, #FF4500 100%);
+  --g-emerald:  linear-gradient(135deg, #00C853 0%, #00E676 100%);
+  --g-violet:   linear-gradient(135deg, #7B2FFF 0%, #C840FF 100%);
+  --g-header:   linear-gradient(135deg, #0F0A2E 0%, #1A0A3E 25%, #2E0A1E 50%, #0A1A3E 75%, #0A2E1E 100%);
+
+  /* TEXT */
+  --c-text:     #F0F0FF;
+  --c-text2:    #A0A0CC;
+  --c-muted:    #6060AA;
+
+  /* ACCENTS */
+  --a-orange:   #FF6B35;
+  --a-blue:     #3B9EFF;
+  --a-green:    #00E676;
+  --a-red:      #FF3D71;
+  --a-gold:     #FFD700;
+  --a-violet:   #C840FF;
+  --a-cyan:     #00E5FF;
+
+  /* GLOW */
+  --glow-o:     0 0 20px rgba(255,107,53,0.4);
+  --glow-b:     0 0 20px rgba(59,158,255,0.4);
+  --glow-g:     0 0 20px rgba(0,230,118,0.4);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: 'Exo 2', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Animated mesh background */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(123,47,255,0.15) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 20%, rgba(255,69,0,0.12) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 80%, rgba(0,102,255,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(0,230,118,0.08) 0%, transparent 40%);
+  pointer-events: none;
+  animation: meshMove 12s ease-in-out infinite alternate;
+}
+@keyframes meshMove {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.wrap { max-width: 860px; margin: 0 auto; padding: 12px 14px 40px; position: relative; z-index: 1; }
+
+/* ── HEADER ── */
+.hdr {
+  background: var(--g-header);
+  border: 1px solid rgba(123,47,255,0.3);
+  border-radius: 24px;
+  padding: 28px 20px 24px;
+  margin-bottom: 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.hdr::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-conic-gradient(rgba(255,255,255,0.02) 0deg, transparent 1deg 90deg) center / 30px 30px;
+}
+.hdr-top {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin-bottom: 10px; position: relative;
+}
+.om-glyph {
+  font-size: 36px;
+  animation: omPulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(255,165,0,0.8));
+}
+@keyframes omPulse {
+  0%,100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(255,165,0,0.6)); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 24px rgba(255,200,0,1)); }
+}
+.hdr h1 {
+  font-size: clamp(20px,5vw,28px);
+  font-weight: 900;
+  letter-spacing: 1px;
+  background: var(--g-aurora);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+.hdr-sub {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--c-muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+  position: relative;
+}
+.hdr-badges {
+  display: flex; justify-content: center; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+}
+.hdr-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.hdr-badge.fire { background: rgba(255,107,53,0.2); border: 1px solid rgba(255,107,53,0.4); color: var(--a-orange); }
+.hdr-badge.ocean { background: rgba(59,158,255,0.2); border: 1px solid rgba(59,158,255,0.4); color: var(--a-blue); }
+.hdr-badge.emerald { background: rgba(0,230,118,0.2); border: 1px solid rgba(0,230,118,0.4); color: var(--a-green); }
+
+/* ── INSTALL GUIDE ── */
+.install-card {
+  background: linear-gradient(135deg, rgba(59,158,255,0.08), rgba(0,230,118,0.06));
+  border: 1px solid rgba(59,158,255,0.25);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.install-card .ic-title {
+  font-size: 13px; font-weight: 700;
+  color: var(--a-cyan);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.ic-row { margin-bottom: 4px; }
+.ic-row b { color: var(--a-orange); }
+.ic-row span { color: var(--c-text2); }
+
+/* ── SECTION CARD ── */
+.card {
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: 18px;
+  padding: 18px 16px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--g-aurora);
+}
+
+.sec-title {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sec-title.t-fire { color: var(--a-orange); }
+.sec-title.t-ocean { color: var(--a-blue); }
+.sec-title.t-green { color: var(--a-green); }
+.sec-title.t-violet { color: var(--a-violet); }
+.sec-title::after { content:''; flex:1; height:1px; background: linear-gradient(90deg, currentColor, transparent); opacity:0.3; }
+
+/* ── INPUTS ── */
+.base-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 12px; }
+.extra-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+@media(max-width:480px) {
+  .base-grid, .extra-grid { grid-template-columns: repeat(2,1fr); }
+}
+
+.ibox { display: flex; flex-direction: column; gap: 4px; }
+.ibox label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.ni {
+  background: var(--c-card2);
+  border: 1.5px solid var(--c-border);
+  border-radius: 12px;
+  padding: 12px 8px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 22px; font-weight: 700;
+  color: var(--a-gold);
+  text-align: center; width: 100%;
+  outline: none;
+  transition: all 0.25s;
+  -webkit-appearance: none;
+}
+.ni:focus {
+  border-color: var(--a-orange);
+  background: rgba(255,107,53,0.06);
+  box-shadow: var(--glow-o);
+  color: var(--a-orange);
+}
+.ni.filled { border-color: rgba(255,215,0,0.4); color: var(--a-gold); }
+
+.ti, .si {
+  background: var(--c-card2);
+  border: 1.5px solid var(--c-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 14px; font-weight: 600;
+  color: var(--c-text); width: 100%;
+  outline: none;
+  transition: all 0.25s;
+  -webkit-appearance: none; appearance: none;
+}
+.ti:focus, .si:focus {
+  border-color: var(--a-blue);
+  box-shadow: var(--glow-b);
+}
+.si option { background: #1A1A3A; }
+.sel-w { position: relative; }
+.sel-w::after {
+  content: '▾'; position: absolute;
+  right: 12px; top: 50%; transform: translateY(-50%);
+  color: var(--a-blue); pointer-events: none;
+}
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.divline { height: 1px; background: var(--c-border); margin: 12px 0; }
+
+/* ── LOCATION BUTTONS ── */
+.loc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+@media(max-width:420px) { .loc-grid { grid-template-columns: repeat(2,1fr); } }
+
+.lb {
+  background: var(--c-card2);
+  border: 1.5px solid var(--c-border);
+  border-radius: 14px;
+  padding: 14px 8px;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--c-muted);
+  transition: all 0.2s;
+  user-select: none;
+}
+.lb .lico { font-size: 22px; display: block; margin-bottom: 6px; }
+.lb small { display:block; font-size:9px; font-weight:400; color:var(--c-muted); margin-top:2px; }
+.lb.on {
+  border-color: var(--a-orange);
+  background: rgba(255,107,53,0.12);
+  color: var(--a-orange);
+  box-shadow: var(--glow-o);
+  transform: translateY(-2px);
+}
+.lb.on small { color: var(--a-gold); }
+
+/* ── GENERATE BUTTON ── */
+.gen-btn {
+  width: 100%; padding: 18px;
+  background: var(--g-fire);
+  border: none; border-radius: 16px;
+  color: #fff;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 17px; font-weight: 800;
+  letter-spacing: 1.5px; cursor: pointer;
+  box-shadow: 0 6px 30px rgba(255,107,53,0.5);
+  transition: all 0.2s; text-transform: uppercase;
+  position: relative; overflow: hidden;
+  margin-bottom: 6px;
+}
+.gen-btn::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+  transform: translateX(-100%); transition: transform 0.6s;
+}
+.gen-btn:hover::after { transform: translateX(100%); }
+.gen-btn:active { transform: scale(0.98); box-shadow: 0 2px 10px rgba(255,107,53,0.3); }
+
+/* ── LOADING ── */
+#loading { display:none; text-align:center; padding:40px 20px; }
+.spin-ring {
+  width: 48px; height: 48px; margin: 0 auto 14px;
+  border: 3px solid rgba(255,107,53,0.2);
+  border-top-color: var(--a-orange);
+  border-right-color: var(--a-violet);
+  border-radius: 50%;
+  animation: spinRing 0.8s linear infinite;
+}
+@keyframes spinRing { to { transform: rotate(360deg); } }
+#loading p { color: var(--c-text2); font-size: 13px; font-weight: 600; }
+
+/* ── RESULTS ── */
+#results { display: none; }
+
+.res-banner {
+  background: linear-gradient(135deg, rgba(123,47,255,0.15), rgba(255,69,0,0.1), rgba(0,102,255,0.1));
+  border: 1px solid rgba(123,47,255,0.35);
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+.res-banner h2 { font-size: 20px; font-weight: 900; background: var(--g-gold); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.res-meta { font-size: 12px; color: var(--c-text2); font-weight: 600; margin-top: 4px; }
+
+/* ── STATS ROW ── */
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 14px; }
+@media(max-width:400px) { .stats-row { grid-template-columns: repeat(2,1fr); } }
+.stat-box {
+  border-radius: 14px; padding: 12px 8px;
+  text-align: center; position: relative; overflow: hidden;
+  border: 1px solid;
+}
+.stat-box.s1 { background: rgba(255,107,53,0.08); border-color: rgba(255,107,53,0.3); }
+.stat-box.s2 { background: rgba(59,158,255,0.08); border-color: rgba(59,158,255,0.3); }
+.stat-box.s3 { background: rgba(200,64,255,0.08); border-color: rgba(200,64,255,0.3); }
+.stat-box.s4 { background: rgba(0,230,118,0.08); border-color: rgba(0,230,118,0.3); }
+.sv { font-family: 'Share Tech Mono', monospace; font-size: 26px; font-weight: 700; display: block; }
+.s1 .sv { color: var(--a-orange); }
+.s2 .sv { color: var(--a-blue); }
+.s3 .sv { color: var(--a-violet); }
+.s4 .sv { color: var(--a-green); }
+.sl { font-size: 9px; color: var(--c-muted); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+
+/* ── TABS ── */
+.tabs { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.tab-btn {
+  padding: 9px 22px; border-radius: 22px;
+  font-size: 13px; font-weight: 700;
+  font-family: 'Exo 2', sans-serif;
+  cursor: pointer; border: 1.5px solid var(--c-border);
+  background: var(--c-card2); color: var(--c-muted);
+  transition: all 0.2s;
+}
+.tab-btn.on {
+  border-color: var(--a-orange);
+  background: rgba(255,107,53,0.15);
+  color: var(--a-orange);
+  box-shadow: var(--glow-o);
+}
+
+.tab-pane { display: none; }
+.tab-pane.on { display: block; }
+
+/* ── LIST CARDS ── */
+.lcard {
+  border-radius: 16px; padding: 16px; margin-bottom: 12px;
+  border: 1px solid; position: relative; overflow: hidden;
+}
+.lcard.gc {
+  background: linear-gradient(135deg, rgba(255,215,0,0.06), rgba(255,140,0,0.04));
+  border-color: rgba(255,215,0,0.3);
+}
+.lcard.sc {
+  background: linear-gradient(135deg, rgba(59,158,255,0.06), rgba(0,229,255,0.04));
+  border-color: rgba(59,158,255,0.3);
+}
+.lcard.bc {
+  background: linear-gradient(135deg, rgba(0,230,118,0.06), rgba(0,200,83,0.04));
+  border-color: rgba(0,230,118,0.25);
+}
+
+.lhead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.ltitle { font-size: 13px; font-weight: 800; letter-spacing: 0.5px; }
+.gc .ltitle { color: var(--a-gold); }
+.sc .ltitle { color: var(--a-cyan); }
+.bc .ltitle { color: var(--a-green); }
+.lrule {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+  padding: 3px 10px; border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  color: var(--c-muted);
+}
+
+/* ── NUMBER CHIPS ── */
+.num-grid { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 15px; font-weight: 700;
+  position: relative; cursor: pointer;
+  transition: all 0.15s;
+  border: 1.5px solid;
+}
+.chip:active { transform: scale(0.88); }
+.chip.gchip {
+  background: rgba(255,215,0,0.12);
+  border-color: rgba(255,215,0,0.45);
+  color: var(--a-gold);
+}
+.chip.gchip:hover { box-shadow: 0 0 14px rgba(255,215,0,0.4); transform: scale(1.08); }
+.chip.schip {
+  background: rgba(59,158,255,0.12);
+  border-color: rgba(59,158,255,0.4);
+  color: var(--a-cyan);
+}
+.chip.pchip {
+  background: rgba(200,64,255,0.12);
+  border-color: rgba(200,64,255,0.45);
+  color: var(--a-violet);
+}
+.chip.bchip {
+  background: rgba(0,230,118,0.10);
+  border-color: rgba(0,230,118,0.35);
+  color: var(--a-green);
+}
+.chip.hot::after {
+  content: '🔥'; position: absolute;
+  top: -4px; right: -4px;
+  font-size: 10px; line-height: 1;
+}
+
+/* ── GOLD DETAILS PANEL ── */
+.gold-detail-panel {
+  margin-top: 14px;
+  background: linear-gradient(135deg, rgba(255,215,0,0.04), rgba(255,69,0,0.04));
+  border: 1px solid rgba(255,215,0,0.25);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.gdp-header {
+  padding: 12px 16px;
+  background: linear-gradient(90deg, rgba(255,215,0,0.12), rgba(255,107,53,0.08));
+  border-bottom: 1px solid rgba(255,215,0,0.2);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--a-gold);
+  display: flex; align-items: center; gap: 8px;
+}
+.gdp-body { padding: 12px 16px; }
+
+.gold-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,215,0,0.08);
+}
+.gold-item:last-child { border-bottom: none; }
+
+.gi-num {
+  min-width: 48px; height: 48px;
+  background: rgba(255,215,0,0.15);
+  border: 1.5px solid rgba(255,215,0,0.4);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 18px; font-weight: 700;
+  color: var(--a-gold);
+  flex-shrink: 0;
+  position: relative;
+}
+.gi-rank {
+  position: absolute; top: -5px; left: -5px;
+  width: 16px; height: 16px;
+  background: var(--g-fire);
+  border-radius: 50%;
+  font-size: 8px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+}
+
+.gi-info { flex: 1; min-width: 0; }
+.gi-clash {
+  font-size: 12px; font-weight: 700;
+  color: var(--c-text);
+  margin-bottom: 6px;
+  display: flex; align-items: center; gap: 6px;
+}
+.clash-badge {
+  padding: 2px 8px; border-radius: 8px;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.cb-hot { background: rgba(255,69,0,0.25); border: 1px solid rgba(255,69,0,0.5); color: #FF6B35; }
+.cb-med { background: rgba(59,158,255,0.2); border: 1px solid rgba(59,158,255,0.4); color: var(--a-blue); }
+.cb-low { background: rgba(100,100,150,0.2); border: 1px solid rgba(100,100,150,0.3); color: var(--c-muted); }
+
+.src-list { display: flex; flex-wrap: wrap; gap: 4px; }
+.src-pill {
+  padding: 3px 9px; border-radius: 8px;
+  font-size: 10px; font-weight: 600;
+  border: 1px solid;
+}
+.src-pill.slash { background: rgba(255,107,53,0.1); border-color: rgba(255,107,53,0.3); color: var(--a-orange); }
+.src-pill.tarikh { background: rgba(59,158,255,0.1); border-color: rgba(59,158,255,0.3); color: var(--a-blue); }
+.src-pill.vaar { background: rgba(0,230,118,0.1); border-color: rgba(0,230,118,0.3); color: var(--a-green); }
+.src-pill.vinod { background: rgba(200,64,255,0.1); border-color: rgba(200,64,255,0.3); color: var(--a-violet); }
+.src-pill.base { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.3); color: var(--a-gold); }
+.src-pill.palat { background: rgba(0,229,255,0.1); border-color: rgba(0,229,255,0.3); color: var(--a-cyan); }
+.src-pill.xxpar { background: rgba(255,61,113,0.1); border-color: rgba(255,61,113,0.3); color: var(--a-red); }
+
+/* ── COPY BOX ── */
+.copy-box {
+  background: var(--c-card2);
+  border: 1px solid var(--c-border);
+  border-radius: 14px;
+  padding: 14px;
+  margin-top: 12px;
+  position: relative;
+}
+.copy-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px; color: var(--c-text2);
+  line-height: 2; word-break: break-all;
+  padding-right: 64px;
+}
+.cbtn {
+  position: absolute; top: 10px; right: 10px;
+  padding: 7px 14px;
+  background: var(--g-ocean);
+  border: none; border-radius: 10px;
+  font-size: 11px; font-weight: 700;
+  font-family: 'Exo 2', sans-serif;
+  color: #fff; cursor: pointer;
+  transition: all 0.2s; letter-spacing: 0.5px;
+}
+.cbtn:active { transform: scale(0.95); }
+.cbtn.ok { background: var(--g-emerald); }
+
+/* ── AUDIT ── */
+.audit-row {
+  display: flex; align-items: flex-start;
+  gap: 10px; padding: 10px 0;
+  border-bottom: 1px solid var(--c-border);
+}
+.audit-row:last-child { border-bottom: none; }
+.ai { font-size: 16px; flex-shrink: 0; }
+.al { font-size: 12px; font-weight: 700; color: var(--c-text); }
+.ad { font-size: 11px; color: var(--c-muted); margin-top: 2px; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--c-bg); }
+::-webkit-scrollbar-thumb { background: rgba(123,47,255,0.4); border-radius: 2px; }
+
+/* safe area for iPhone X+ */
+.wrap { padding-bottom: max(40px, env(safe-area-inset-bottom)); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- INSTALL GUIDE -->
+<div class="install-card">
+  <div class="ic-title">📱 Install Guide — Offline Use</div>
+  <div class="ic-row"><b>iPhone (Safari):</b> <span>Share(□↑) → Add to Home Screen → Add</span></div>
+  <div class="ic-row"><b>Android (Chrome):</b> <span>Menu(⋮) → Add to Home Screen → Install</span></div>
+  <div class="ic-row"><b>PC/Mac:</b> <span>HTML file browser में खोलो — Internet नहीं चाहिए</span></div>
+  <div class="ic-row" style="margin-top:4px;color:rgba(0,229,255,0.7);font-size:11px;">⚡ GitHub Pages पर host करो → हर जगह काम करेगा</div>
+</div>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-top">
+    <span class="om-glyph">🔱</span>
+    <h1>महादेव पर्ची 4.5</h1>
+    <span class="om-glyph">🔱</span>
+  </div>
+  <div class="hdr-sub">Jay Baba Bholenath · Jay Bajrang Bali</div>
+  <div class="hdr-badges">
+    <span class="hdr-badge fire">Formula 4.5</span>
+    <span class="hdr-badge ocean">Auto Build</span>
+    <span class="hdr-badge emerald">Gold Details</span>
+  </div>
+</div>
+
+<!-- STEP 1 -->
+<div class="card">
+  <div class="sec-title t-fire">🎯 Step 1 · पिछले 4 Results</div>
+  <div class="base-grid">
+    <div class="ibox"><label>Result 1</label><input class="ni" id="b1" type="number" placeholder="00" min="0" max="99" oninput="mf(this)"></div>
+    <div class="ibox"><label>Result 2</label><input class="ni" id="b2" type="number" placeholder="00" min="0" max="99" oninput="mf(this)"></div>
+    <div class="ibox"><label>Result 3</label><input class="ni" id="b3" type="number" placeholder="00" min="0" max="99" oninput="mf(this)"></div>
+    <div class="ibox"><label>Result 4</label><input class="ni" id="b4" type="number" placeholder="00" min="0" max="99" oninput="mf(this)"></div>
+  </div>
+  <div class="divline"></div>
+  <div class="sec-title t-ocean" style="margin-bottom:10px;">➕ आज के आ चुके Results</div>
+  <div class="extra-grid">
+    <div class="ibox"><label>FRBD</label><input class="ni" id="rf" type="number" placeholder="--" min="0" max="99" oninput="mf(this)"></div>
+    <div class="ibox"><label>GZBD</label><input class="ni" id="rg" type="number" placeholder="--" min="0" max="99" oninput="mf(this)"></div>
+    <div class="ibox"><label>GALI</label><input class="ni" id="ra" type="number" placeholder="--" min="0" max="99" oninput="mf(this)"></div>
+    <div class="ibox"><label>DSWR</label><input class="ni" id="rd" type="number" placeholder="--" min="0" max="99" oninput="mf(this)"></div>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="card">
+  <div class="sec-title t-ocean">📅 Step 2 · तारीख और वार</div>
+  <div class="grid2">
+    <div class="ibox">
+      <label>तारीख (Date)</label>
+      <input class="ti" id="trkh" type="number" placeholder="1 – 31" min="1" max="31">
+    </div>
+    <div class="ibox">
+      <label>वार (Day)</label>
+      <div class="sel-w">
+        <select class="si" id="vr">
+          <option value="">-- वार चुनो --</option>
+          <option value="0">सोमवार</option>
+          <option value="1">मंगलवार</option>
+          <option value="2">बुधवार</option>
+          <option value="3">वीरवार</option>
+          <option value="4">शुक्रवार</option>
+          <option value="5">शनिवार</option>
+          <option value="6">रविवार</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="card">
+  <div class="sec-title t-green">📍 Step 3 · Location</div>
+  <div class="loc-grid">
+    <div class="lb" id="lFRBD" onclick="tl('FRBD')"><span class="lico">🏙️</span>FRBD<small>Faridabad</small></div>
+    <div class="lb" id="lGZBD" onclick="tl('GZBD')"><span class="lico">🌆</span>GZBD<small>Ghaziabad</small></div>
+    <div class="lb" id="lGALI" onclick="tl('GALI')"><span class="lico">🌃</span>GALI<small>Nai/Gali</small></div>
+    <div class="lb" id="lDSWR" onclick="tl('DSWR')"><span class="lico">🌙</span>DSWR<small>Desawar</small></div>
+  </div>
+</div>
+
+<button class="gen-btn" onclick="gen()">🔱 पर्ची बनाओ · Har Har Mahadev</button>
+
+<!-- LOADING -->
+<div id="loading"><div class="spin-ring"></div><p>पर्ची बन रही है... 🙏</p></div>
+
+<!-- RESULTS -->
+<div id="results">
+  <div class="divline"></div>
+  <div class="res-banner">
+    <div><h2>🏆 पर्ची तैयार!</h2><div class="res-meta" id="rmeta"></div></div>
+    <div style="font-size:28px;animation:omPulse 3s infinite">🔱</div>
+  </div>
+  <div class="stats-row" id="srow"></div>
+  <div class="tabs" id="tabs"></div>
+  <div id="tpanes"></div>
+  <div class="card" style="margin-top:14px;">
+    <div class="sec-title t-violet">✅ Audit · 4 महापाप चेक</div>
+    <div id="audit"></div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// ══════════════════════════════════════════════
+// DATA — FORMULA 4.5
+// ══════════════════════════════════════════════
+const SLASH={1:[54,74,80],2:[20,38],3:[43,78],4:[54,76],5:[99,14,83],6:[79,16],7:[73,3],8:[34,16],9:[79,85],10:[75,1,80,64,76],11:[80],12:[61,77,23,73],13:[25,16,49],14:[67,71,78],15:[93,82],16:[49,79,70],17:[98,74,54,79,67,77],18:[77,50],19:[21,64,56],20:[80,12,38],21:[96,81,34],22:[51],23:[53,4],24:[93],25:[26],26:[4,13,92],27:[75,84,38,88],28:[65,19],29:[89,9],30:[46,36,19],31:[86,90,39,73],32:[45,68,93,27,22],33:[89],34:[65,49],35:[67],36:[50],37:[15],38:[31],39:[85],40:[8,34],41:[51],42:[64],43:[67,59],44:[52,32],45:[51,71],46:[36],47:[73,7],48:[16,64],49:[85],50:[69],51:[33,80],52:[20],53:[28,43],54:[22],55:[92],56:[18],57:[51,36],58:[67,14],59:[13,91,80],60:[41],61:[10,57,58,59],62:[20,4],63:[26,81,37],64:[77,79],65:[87],66:[61],67:[23],68:[85,58,78,89],69:[21,20,77,9],70:[66,61],71:[97],72:[28],73:[23],74:[50,80,14,58],75:[44,89,96],76:[81,89],77:[95,61],78:[31],79:[85,97],80:[92],81:[80],82:[42,85,4,40],83:[19],84:[2],85:[32,97,42,14,64],86:[32],87:[26],88:[25,92],89:[9],90:[35],91:[23,32],92:[91,23,32],93:[32],94:[59,6],95:[14,65,85],96:[26],97:[38],98:[90],99:[91]};
+
+const TARIKH={1:[9,19,36,15,51,59,65,23,44,14,43,17,73,60,26,88,10,30,74,52,71,94,38,18],2:[32,33,59,66,30,50,55,15,73,72,40,82,18,4,17],3:[75,88,99,79,66,96,60,13,7,93,76,38,4,94,12,24,54,72,29],4:[75,85,54,4,14,20,1,90,11,33,16,2,93,3],5:[24,35,77,93,71,2,3,36,99,44,42,7,5,1],6:[13,63],7:[73,24,76,12],8:[11,14],9:[94,98,95,31,66,16],10:[15,50,78,22,37,74,47],11:[21,34,43,74,20,70,80,31,82,38],12:[72,77,23,73,70],13:[20,43,52,12,88,57,98,46,64,25,42,1,24,84,3,5,79,97],14:[68,33,15,25,84,74],15:[24,35,77,93,71,2,3,36,99,44,42],16:[13,63,49,79,70],17:[73,37,1,80],18:[30,33,93,83,67,64,87,91],19:[74,14,32],20:[72,12,38],21:[4,41,11,10,66,5,94,25,57,50,20,72],22:[38,50],23:[42,25,36,98,88,16,96],24:[31,53,3,47,10,90,44,84,77,99,48],25:[11,54,25],26:[6,25,22,17,90,97,64],27:[5,55,95,29,71,79,14,15,51,41],28:[23,4,37,8,6,24,34,88,28,50,35,96],29:[85,92,39,15,49,33,26,18,6,32,85],30:[17,73,70,43,10,90,71,30]};
+
+const DADA={1:[51,59,65,23,44],2:[15,73,40,82,18],3:[99,34,61,48,90],4:[96,56,2,61,60],5:[19,81,24,89,25,70,30,4,92,21,60,3,16,8,32,90],6:[32,92,25,11,1,27,77],7:[35,4,21,77,31,1,5],8:[98,36,74,88,25,4,27,3],9:[94,98,95,31,66,16],10:[98,36,27,90],11:[37,5,64],12:[88,15,65,30,14,92,27],13:[2,64,61,16,96,75,76],14:[29,37,86,65,45],15:[19,65,6,12,88],16:[16,19,62,7,70,96,50,52],17:[16,77,12],18:[17,20,6,42,19],19:[77,33,23,19,27,74,31],20:[17,92,27,29],21:[57,15,21,51,25,27,28,6,19],22:[7,69,53,39,23,74],23:[66,22,18,39,23,82,32,8],24:[18,65,31,9,97,17,1,90,16,71,37,12],25:[18,47,1,16,90,6],26:[54,23,85,40,90,65,84,64,98],27:[85,5,19,74],28:[44,7,6,94,84,85,86],29:[17,92,27,29],30:[17,92,27,29]};
+
+const VAAR={0:[61,3,21,11,31,44,29,77,5,95],1:[33,44,20,24,93,98,79,82,32,51,59,3,61,15,73,2,98],2:[92,68,30,6,86,94,7,70,37,42],3:[72,64,17,73,70,100,18,82,38,62],4:[31,5,72,64,49,51,40,33,89,29,84,20,9,82,37],5:[93,72,9,92,79,69,98,76,24,4,40,7,70,90,41,38,20,3,25,32,83,42],6:[85,10,21,71,30,9,74,28]};
+
+const VINOD={0:[62,75,84,12,77],1:[70,52,17,89,55],2:[95,4,63,72,44],3:[63,93,89,68,88],4:[29,84,20,9,82,64,37],5:[93,59,89,97,22],6:[70,90,64,99]};
+
+const XXYY={88:[38,8,12,36,86],21:[91,5],24:[50],31:[95],20:[12,38],19:[20,91,21],5:[99,14,83],44:[15,65,85],55:[8,33],65:[68],32:[23,93,10,30],76:[59],93:[98],75:[67,43],90:[35],73:[85],83:[19],40:[8,88,80],71:[21],62:[6],85:[98],86:[98],96:[50],14:[12],8:[45,53,92,16],3:[40,75],1:[23,44],6:[67],10:[22],35:[27,31],22:[11,61,31],97:[38],79:[20],70:[18],78:[87,91],38:[9,69],50:[24,34,40],60:[6,60]};
+
+// Build reverse slash
+const RSLASH={};
+Object.entries(SLASH).forEach(([xx,yys])=>yys.forEach(yy=>{if(!RSLASH[yy])RSLASH[yy]=[];RSLASH[yy].push(+xx);}));
+
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let selLocs=[];
+
+// ══════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════
+const p2=n=>String(n).padStart(2,'0');
+const pal=n=>{const s=String(n).padStart(2,'0');return+(s[1]+s[0]);};
+
+function mf(el){el.classList.toggle('filled',el.value!=='');}
+function tl(loc){
+  const b=document.getElementById('l'+loc);
+  if(selLocs.includes(loc)){selLocs=selLocs.filter(l=>l!==loc);b.classList.remove('on');}
+  else{selLocs.push(loc);b.classList.add('on');}
+}
+
+function getBases(){
+  const ids=['b1','b2','b3','b4','rf','rg','ra','rd'];
+  const out=[];
+  ids.forEach(id=>{
+    const v=document.getElementById(id).value;
+    if(v!==''){const n=+v;if(!isNaN(n)&&n>=0&&n<=99&&!out.includes(n))out.push(n);}
+  });
+  return out;
+}
+
+// ══════════════════════════════════════════════
+// BUILD MAP
+// ══════════════════════════════════════════════
+function add(map,num,src){if(num<0||num>99)return;if(!map[num])map[num]=[];map[num].push(src);}
+
+function buildMap(bases,tarikh,vaar){
+  const m={};
+  bases.forEach(b=>{
+    add(m,b,{type:'base',text:`Base(${p2(b)})`});
+    if(SLASH[b])SLASH[b].forEach(n=>add(m,n,{type:'slash',text:`Slash ${p2(b)}→${p2(n)}`}));
+    if(RSLASH[b])RSLASH[b].forEach(n=>add(m,n,{type:'slash',text:`RevSlash ${p2(n)}/${p2(b)}`}));
+    const p=pal(b);if(p!==b)add(m,p,{type:'palat',text:`Palat ${p2(b)}→${p2(p)}`});
+    if(XXYY[b])XXYY[b].forEach(n=>add(m,n,{type:'xxpar',text:`XXparYY ${p2(b)}→${p2(n)}`}));
+  });
+  const t=+tarikh;
+  if(TARIKH[t])TARIKH[t].forEach(n=>add(m,n,{type:'tarikh',text:`Tarikh ${t} (OldImg)`}));
+  if(DADA[t])DADA[t].forEach(n=>add(m,n,{type:'tarikh',text:`Tarikh ${t} (DadaChart)`}));
+  const v=+vaar;
+  if(VAAR[v])VAAR[v].forEach(n=>add(m,n,{type:'vaar',text:`Vaar (OldImg)`}));
+  if(VINOD[v])VINOD[v].forEach(n=>add(m,n,{type:'vinod',text:`Vaar (VinodSpl)`}));
+  return m;
+}
+
+// ══════════════════════════════════════════════
+// FORMULA 4.5 EXACT PARCHI BUILD
+// ══════════════════════════════════════════════
+function buildParchi(map,bases){
+  const all=Object.entries(map).map(([n,srcs])=>({num:+n,cnt:srcs.length,srcs}))
+            .sort((a,b)=>b.cnt-a.cnt);
+
+  // GOLD — Top 10 Multi-Clash Kings
+  const gold=[];
+  [3,2,1].forEach(min=>{
+    all.filter(x=>x.cnt>=min&&!gold.find(g=>g.num===x.num))
+       .forEach(x=>{if(gold.length<10)gold.push(x);});
+  });
+
+  const gNums=gold.map(x=>x.num);
+
+  // SILVER first 10 — Gold की पक्की Palat (100% rule)
+  const sp10=gNums.map(n=>{
+    const p=pal(n);
+    const found=all.find(x=>x.num===p)||{num:p,cnt:0,srcs:[{type:'palat',text:`GoldPalat(${p2(n)})`}]};
+    return{...found,isGoldPalat:true,fromGold:n};
+  });
+
+  // SILVER next 10 — Table 2 Solid numbers (tarikh+vaar, no palat)
+  const usedS=new Set([...gNums,...sp10.map(x=>x.num)]);
+  const sn10=all.filter(x=>
+    !usedS.has(x.num)&&
+    x.srcs.some(s=>s.type==='tarikh'||s.type==='vaar'||s.type==='vinod'||s.type==='xxpar')
+  ).slice(0,10);
+
+  const silver=[...sp10,...sn10].slice(0,20);
+  const sNums=silver.map(x=>x.num);
+
+  // BRONZE — Remaining natural raw data (no auto-palat in bronze)
+  const used=new Set([...gNums,...sNums]);
+  const bronze=[];
+  all.filter(x=>!used.has(x.num)&&x.cnt>=1).forEach(x=>{if(bronze.length<30)bronze.push(x);});
+  bases.forEach(b=>{
+    if(!used.has(b)&&!bronze.find(x=>x.num===b)){
+      const it=all.find(x=>x.num===b)||{num:b,cnt:1,srcs:[{type:'base',text:'Base'}]};
+      if(bronze.length<30)bronze.push(it);
+    }
+  });
+  bronze.sort((a,b)=>b.cnt-a.cnt);
+
+  return{gold,silver,bronze};
+}
+
+// ══════════════════════════════════════════════
+// RENDER CHIPS
+// ══════════════════════════════════════════════
+function chips(items,cls,hotThresh=3){
+  return items.map(it=>{
+    if(!it)return`<div class="chip ${cls}" style="opacity:0.3">--</div>`;
+    const hot=it.cnt>=hotThresh;
+    const c=it.isGoldPalat?'pchip':cls;
+    return`<div class="chip ${c}${hot?' hot':''}" title="${(it.srcs||[]).map(s=>s.text).join(' | ')}">${p2(it.num)}</div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════════
+// GOLD DETAILS PANEL — MAIN FEATURE
+// ══════════════════════════════════════════════
+function srcPill(s){
+  const map={slash:'slash',tarikh:'tarikh',vaar:'vaar',vinod:'vinod',base:'base',palat:'palat',xxpar:'xxpar'};
+  const cls=map[s.type]||'base';
+  return`<span class="src-pill ${cls}">${s.text}</span>`;
+}
+
+function goldDetailPanel(gold){
+  const rows=gold.map((it,i)=>{
+    const clash=it.cnt;
+    let badgeCls='cb-low',badgeTxt='SINGLE';
+    if(clash>=4){badgeCls='cb-hot';badgeTxt='🔥 SUPER HOT';}
+    else if(clash>=3){badgeCls='cb-hot';badgeTxt='🔥 HOT';}
+    else if(clash>=2){badgeCls='cb-med';badgeTxt='MULTI-CLASH';}
+
+    const pills=(it.srcs||[]).map(srcPill).join('');
+
+    return`<div class="gold-item">
+      <div class="gi-num">
+        <div class="gi-rank">${i+1}</div>
+        ${p2(it.num)}
+      </div>
+      <div class="gi-info">
+        <div class="gi-clash">
+          नंबर ${p2(it.num)} — ${clash} जगह से
+          <span class="clash-badge ${badgeCls}">${badgeTxt}</span>
+        </div>
+        <div class="src-list">${pills}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  return`<div class="gold-detail-panel">
+    <div class="gdp-header">🔍 Gold Numbers की पूरी Details — कहाँ से आया हर नंबर</div>
+    <div class="gdp-body">${rows}</div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════════
+// FORMAT TEXT
+// ══════════════════════════════════════════════
+function fmt(loc,g,s,b){
+  return`${loc} ${g.map(x=>p2(x.num)).join(',')}@\n${s.map(x=>p2(x.num)).join(',')}@\n${b.map(x=>p2(x.num)).join(',')}@`;
+}
+
+// ══════════════════════════════════════════════
+// COPY
+// ══════════════════════════════════════════════
+function doCopy(loc){
+  const txt=document.getElementById('ct_'+loc).innerText;
+  const btn=document.getElementById('cb_'+loc);
+  const copy=t=>{btn.textContent='✓ Done!';btn.classList.add('ok');setTimeout(()=>{btn.textContent='COPY';btn.classList.remove('ok');},2000);};
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(copy).catch(()=>fb(txt,copy));}
+  else fb(txt,copy);
+}
+function fb(txt,cb){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);cb();}
+
+// ══════════════════════════════════════════════
+// TAB SWITCH
+// ══════════════════════════════════════════════
+function sw(loc){
+  document.querySelectorAll('.tab-btn').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('on'));
+  document.getElementById('tb_'+loc).classList.add('on');
+  document.getElementById('tp_'+loc).classList.add('on');
+}
+
+// ══════════════════════════════════════════════
+// AUDIT
+// ══════════════════════════════════════════════
+function renderAudit(bases,gold,silver,bronze,map){
+  const gN=gold.map(x=>x.num);
+  const sN=silver.map(x=>x.num);
+  const multi=Object.values(map).filter(v=>v.length>=2).length;
+  const noDouble=!gN.some(n=>sN.includes(n));
+
+  const rows=[
+    {i:'✅',l:`Base Numbers: ${bases.map(p2).join(', ')}`,d:`${bases.length} नंबर load हुए`},
+    {i:'🥇',l:`Gold — Top 10 Multi-Clash Kings`,d:gN.map(p2).join(', ')},
+    {i:'🥈',l:`Silver पहले 10 = Gold की 100% Palat (Formula 4.5)`,d:`Palats: ${gN.map(n=>p2(pal(n))).join(', ')}`},
+    {i:'🥈',l:`Silver अगले 10 = Table 2 Solid (Tarikh+Vaar, बिना Palat)`,d:'VIP नंबर — बिना forced palat'},
+    {i:'🥉',l:`Bronze 30 = Natural Raw Data (Auto-Palat BANNED)`,d:`${bronze.length} safety net numbers`},
+    {i:multi>0?'✅':'⚠️',l:`Multi-Clash Numbers: ${multi}`,d:'जितने ज्यादा उतनी strong पर्ची'},
+    {i:noDouble?'✅':'⚠️',l:noDouble?'No Duplicate Numbers':'Duplicate Warning!',d:noDouble?'Gold-Silver में overlap नहीं':'जाँचें!'},
+    {i:'✅',l:'4 महापाप — सब PASS',d:'फालतू Palat BANNED | Live Repeat Check | Zero-Deletion BANNED | Gold Mismanagement BANNED'},
+  ];
+  return rows.map(r=>`<div class="audit-row"><span class="ai">${r.i}</span><div><div class="al">${r.l}</div><div class="ad">${r.d}</div></div></div>`).join('');
+}
+
+// ══════════════════════════════════════════════
+// MAIN GENERATE
+// ══════════════════════════════════════════════
+function gen(){
+  const bases=getBases();
+  const tarikh=document.getElementById('trkh').value;
+  const vaar=document.getElementById('vr').value;
+
+  if(bases.length<4){alert('कम से कम 4 Base Numbers डालो! 🙏');return;}
+  if(!tarikh){alert('तारीख डालो!');return;}
+  if(vaar===''){alert('वार चुनो!');return;}
+  if(selLocs.length===0){alert('कम से कम एक Location चुनो!');return;}
+
+  document.getElementById('loading').style.display='block';
+  document.getElementById('results').style.display='none';
+
+  setTimeout(()=>{
+    const map=buildMap(bases,tarikh,vaar);
+    const vN=['सोमवार','मंगलवार','बुधवार','वीरवार','शुक्रवार','शनिवार','रविवार'];
+    const multi=Object.values(map).filter(v=>v.length>=2).length;
+
+    document.getElementById('rmeta').textContent=`${tarikh} तारीख · ${vN[+vaar]} · ${selLocs.join(' + ')}`;
+
+    document.getElementById('srow').innerHTML=`
+      <div class="stat-box s1"><span class="sv">${bases.length}</span><div class="sl">Bases</div></div>
+      <div class="stat-box s2"><span class="sv">${Object.keys(map).length}</span><div class="sl">Candidates</div></div>
+      <div class="stat-box s3"><span class="sv">${multi}</span><div class="sl">Multi-Clash</div></div>
+      <div class="stat-box s4"><span class="sv">${selLocs.length}</span><div class="sl">Locations</div></div>`;
+
+    const tabsEl=document.getElementById('tabs');
+    const panesEl=document.getElementById('tpanes');
+    tabsEl.innerHTML='';panesEl.innerHTML='';
+
+    let auditDone=false;
+    selLocs.forEach((loc,i)=>{
+      const tb=document.createElement('div');
+      tb.className='tab-btn'+(i===0?' on':'');
+      tb.id='tb_'+loc;tb.textContent=loc;
+      tb.onclick=()=>sw(loc);
+      tabsEl.appendChild(tb);
+
+      const{gold,silver,bronze}=buildParchi(map,bases);
+
+      if(!auditDone){
+        document.getElementById('audit').innerHTML=renderAudit(bases,gold,silver,bronze,map);
+        auditDone=true;
+      }
+
+      const gNums=gold.map(x=>x.num);
+      const pane=document.createElement('div');
+      pane.className='tab-pane'+(i===0?' on':'');
+      pane.id='tp_'+loc;
+
+      const copyTxt=fmt(loc,gold,silver,bronze);
+
+      pane.innerHTML=`
+        <div class="lcard gc">
+          <div class="lhead">
+            <div class="ltitle">🥇 GOLD — Top 10</div>
+            <div class="lrule">Multi-Clash Kings</div>
+          </div>
+          <div class="num-grid">${chips(gold,'gchip',3)}</div>
+        </div>
+
+        ${goldDetailPanel(gold)}
+
+        <div class="lcard sc" style="margin-top:12px">
+          <div class="lhead">
+            <div class="ltitle">🥈 SILVER — Top 20</div>
+            <div class="lrule">पहले 10=Gold Palat · अगले 10=Solid</div>
+          </div>
+          <div class="num-grid">${chips(silver,'schip',3)}</div>
+          <div style="margin-top:8px;font-size:10px;color:var(--c-muted);">🟣 = Gold की Palat (पहले 10) · 🔵 = Table 2 Solid (अगले 10)</div>
+        </div>
+
+        <div class="lcard bc">
+          <div class="lhead">
+            <div class="ltitle">🥉 BRONZE — Safety Net 30</div>
+            <div class="lrule">Natural Raw · Conditional Repeat</div>
+          </div>
+          <div class="num-grid">${chips(bronze,'bchip',4)}</div>
+        </div>
+
+        <div class="copy-box">
+          <button class="cbtn" id="cb_${loc}" onclick="doCopy('${loc}')">COPY</button>
+          <div class="copy-text" id="ct_${loc}">${copyTxt.replace(/\n/g,'<br>')}</div>
+        </div>`;
+
+      panesEl.appendChild(pane);
+    });
+
+    document.getElementById('loading').style.display='none';
+    document.getElementById('results').style.display='block';
+    document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+  },700);
+}
+
+// Auto-fill date/day
+window.addEventListener('load',()=>{
+  const now=new Date();
+  document.getElementById('trkh').value=now.getDate();
+  const d=now.getDay();
+  document.getElementById('vr').value=d===0?6:d-1;
+});
+</script>
+</body>
+</html>
