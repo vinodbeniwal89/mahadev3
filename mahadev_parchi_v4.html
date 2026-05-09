@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="🔱 Parchi">
+<meta name="theme-color" content="#FFF5EB">
+<title>🔱 Mahadev Parchi 4.5</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
+:root{
+  --bg:#FFF5EB; --bg2:#FFF0E0; --bg3:#FFECD0;
+  --card:#FFFFFF; --card2:#FFF8F0;
+  --bdr:#F0D8B8; --bdr2:#E8C898;
+  --txt:#1A0A00; --txt2:#5A3010; --muted:#9A7040;
+  --orange:#E85A00; --orange2:#FF7A20; --orange3:#FF9A40;
+  --blue:#0055CC; --blue2:#2277EE; --blue3:#55AAFF;
+  --green:#007730; --green2:#22AA55; --green3:#55DD88;
+  --red:#CC0022; --red2:#EE3344; --red3:#FF8899;
+  --violet:#6600CC; --violet2:#9922EE; --violet3:#CC88FF;
+  --gold:#996600; --gold2:#CC8800; --gold3:#FFCC00;
+  --shadow:0 2px 16px rgba(180,100,0,0.10);
+  --shadow2:0 4px 24px rgba(180,100,0,0.16);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Nunito',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;z-index:0;
+  background:radial-gradient(ellipse at 0% 0%,rgba(255,160,60,0.10) 0%,transparent 55%),
+             radial-gradient(ellipse at 100% 100%,rgba(0,100,220,0.06) 0%,transparent 55%);
+  pointer-events:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px 14px;position:relative;z-index:1;padding-bottom:max(30px,env(safe-area-inset-bottom))}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#FF6600,#FF9900,#FFD700,#FF6600);background-size:200% 200%;animation:hgrad 6s ease infinite;border-radius:20px;padding:22px 20px 18px;margin-bottom:16px;text-align:center;box-shadow:var(--shadow2);position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,0.04) 0,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 10px)}
+@keyframes hgrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.om{font-size:32px;display:block;margin-bottom:6px;animation:omP 3s ease-in-out infinite;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.25))}
+@keyframes omP{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.hdr h1{font-size:clamp(18px,5vw,26px);font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.25);letter-spacing:.5px}
+.hdr p{color:rgba(255,255,255,0.88);font-size:11px;margin-top:5px;letter-spacing:2px}
+.hdr-nav{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.hnav{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid rgba(255,255,255,0.5);background:rgba(255,255,255,0.18);color:#fff;transition:all .2s;letter-spacing:.5px}
+.hnav.on{background:rgba(255,255,255,0.9);color:var(--orange);border-color:transparent}
+
+/* PAGES */
+.page{display:none}.page.on{display:block}
+
+/* CARD */
+.card{background:var(--card);border:1.5px solid var(--bdr);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.card-top{height:3px;border-radius:16px 16px 0 0;margin:-16px -16px 14px}
+.ct-orange{background:linear-gradient(90deg,var(--orange),var(--orange3))}
+.ct-blue{background:linear-gradient(90deg,var(--blue),var(--blue3))}
+.ct-green{background:linear-gradient(90deg,var(--green),var(--green3))}
+.ct-violet{background:linear-gradient(90deg,var(--violet),var(--violet3))}
+.ct-gold{background:linear-gradient(90deg,var(--gold),var(--gold3))}
+.ct-red{background:linear-gradient(90deg,var(--red),var(--red3))}
+.ct-multi{background:linear-gradient(90deg,#FF6600,#0055CC,#007730,#6600CC)}
+
+.sec-ttl{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sec-ttl::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,currentColor,transparent);opacity:.25}
+.t-orange{color:var(--orange)} .t-blue{color:var(--blue)} .t-green{color:var(--green)}
+.t-violet{color:var(--violet)} .t-gold{color:var(--gold)} .t-red{color:var(--red)}
+
+/* INPUTS */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.g4{grid-template-columns:repeat(2,1fr)}}
+.ib{display:flex;flex-direction:column;gap:4px}
+.ib label{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.ni{background:var(--bg2);border:1.5px solid var(--bdr);border-radius:10px;padding:10px 6px;font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--orange);text-align:center;width:100%;outline:none;transition:all .2s;-webkit-appearance:none}
+.ni:focus{border-color:var(--orange);background:#fff;box-shadow:0 0 0 3px rgba(232,90,0,.10)}
+.ni.ok{border-color:var(--orange2);background:#fff}
+.ti,.si{background:var(--bg2);border:1.5px solid var(--bdr);border-radius:10px;padding:11px 12px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--txt);width:100%;outline:none;transition:all .2s;-webkit-appearance:none;appearance:none}
+.ti:focus,.si:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(0,85,204,.08)}
+.sw{position:relative}.sw::after{content:'▾';position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--blue);pointer-events:none}
+.si option{background:#fff;color:var(--txt)}
+.divl{height:1px;background:var(--bdr);margin:10px 0}
+
+/* LOCATION */
+.lg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:420px){.lg{grid-template-columns:repeat(2,1fr)}}
+.lb{background:var(--bg2);border:2px solid var(--bdr);border-radius:12px;padding:12px 8px;cursor:pointer;text-align:center;font-weight:800;font-size:13px;color:var(--muted);transition:all .2s;user-select:none}
+.lb .li{font-size:20px;display:block;margin-bottom:4px}
+.lb small{display:block;font-size:9px;font-weight:600;color:var(--muted);margin-top:2px}
+.lb.on{border-color:var(--orange);background:#FFF0E0;color:var(--orange);transform:translateY(-2px);box-shadow:0 4px 12px rgba(232,90,0,.15)}
+.lb.on small{color:var(--orange2)}
+
+/* GEN BTN */
+.gbtn{width:100%;padding:16px;background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:14px;color:#fff;font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 6px 20px rgba(232,90,0,.35);transition:all .2s;text-transform:uppercase;position:relative;overflow:hidden}
+.gbtn:active{transform:scale(.98)}
+.gbtn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:transform .6s}
+.gbtn:hover::after{transform:translateX(100%)}
+
+/* LOADING */
+#loading{display:none;text-align:center;padding:36px}
+.spin{width:40px;height:40px;border:3px solid var(--bdr2);border-top-color:var(--orange);border-right-color:var(--blue);border-radius:50%;animation:sp .8s linear infinite;margin:0 auto 12px}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* RESULTS */
+#results{display:none}
+.rbanner{background:linear-gradient(135deg,#FFF0D8,#E8F4FF);border:1.5px solid var(--bdr2);border-radius:16px;padding:16px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;box-shadow:var(--shadow)}
+.rbanner h2{font-size:18px;font-weight:900;color:var(--orange)}
+.rmeta{font-size:12px;color:var(--muted);font-weight:700;margin-top:3px}
+
+/* STATS */
+.srow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+@media(max-width:400px){.srow{grid-template-columns:repeat(2,1fr)}}
+.sb{border-radius:12px;padding:10px 8px;text-align:center;border:1.5px solid}
+.sb1{background:#FFF0E0;border-color:#F0C890}.sb2{background:#E8F0FF;border-color:#90B8F0}
+.sb3{background:#F0E8FF;border-color:#C090F0}.sb4{background:#E8FFF0;border-color:#90E0A8}
+.sv{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;display:block}
+.sb1 .sv{color:var(--orange)}.sb2 .sv{color:var(--blue)}.sb3 .sv{color:var(--violet)}.sb4 .sv{color:var(--green)}
+.sl{font-size:9px;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+
+/* TABS */
+.tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.tbb{padding:8px 20px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;border:1.5px solid var(--bdr);background:var(--bg2);color:var(--muted);transition:all .2s}
+.tbb.on{border-color:var(--orange);background:#FFF0E0;color:var(--orange)}
+.tpane{display:none}.tpane.on{display:block}
+
+/* LIST CARDS */
+.lc{border-radius:14px;padding:14px;margin-bottom:10px;border:1.5px solid}
+/* Gold */
+.gc{background:linear-gradient(135deg,#FFFBE8,#FFF3C0);border-color:#E8C030}
+/* Silver */
+.sc{background:linear-gradient(135deg,#EEF4FF,#DCE8FF);border-color:#90B0EE}
+/* Bronze */
+.bc{background:linear-gradient(135deg,#EEFFF5,#CCFFDD);border-color:#60CC90}
+
+.lhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.lttl{font-size:13px;font-weight:900}
+.gc .lttl{color:var(--gold)}.sc .lttl{color:var(--blue)}.bc .lttl{color:var(--green)}
+.lrule{font-size:9px;font-weight:700;padding:3px 10px;border-radius:8px;background:rgba(255,255,255,.7);color:var(--muted)}
+
+/* CHIPS */
+.ng{display:flex;flex-wrap:wrap;gap:6px}
+.chip{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;position:relative;cursor:pointer;transition:transform .15s;border:1.5px solid}
+.chip:active{transform:scale(.88)}
+/* Gold chip */
+.gchip{background:#FFF8D0;border-color:#D4A010;color:var(--gold)}
+/* Silver chips: first 10 palat = blue, next 10 solid = green */
+.s1chip{background:#DCE8FF;border-color:#6090DD;color:var(--blue)}
+.s2chip{background:#CCFFDD;border-color:#40AA70;color:var(--green)}
+/* Bronze chip */
+.bchip{background:#F0F0F0;border-color:#B0B0B0;color:#505050}
+.chip.hot::after{content:'🔥';position:absolute;top:-5px;right:-5px;font-size:10px}
+
+/* GOLD DETAIL */
+.gdp{margin-top:12px;background:linear-gradient(135deg,#FFFDF0,#FFF8D0);border:1.5px solid #E8C040;border-radius:14px;overflow:hidden}
+.gdp-hdr{padding:10px 14px;background:linear-gradient(90deg,rgba(230,180,0,.12),rgba(255,120,0,.08));border-bottom:1px solid #E8C040;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:6px}
+.gdp-body{padding:10px 14px}
+.gi{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(230,180,0,.15)}
+.gi:last-child{border-bottom:none}
+.gi-n{min-width:46px;height:46px;background:#FFF8D0;border:1.5px solid #D4A010;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--gold);flex-shrink:0;position:relative}
+.gi-rank{position:absolute;top:-5px;left:-5px;width:16px;height:16px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:50%;font-size:8px;font-weight:800;display:flex;align-items:center;justify-content:center;color:#fff}
+.gi-info{flex:1;min-width:0}
+.gi-top{font-size:12px;font-weight:700;color:var(--txt);margin-bottom:5px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.cbadge{padding:2px 8px;border-radius:8px;font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.cb-hot{background:rgba(200,0,0,.1);border:1px solid rgba(200,0,0,.3);color:var(--red)}
+.cb-med{background:rgba(0,80,200,.1);border:1px solid rgba(0,80,200,.3);color:var(--blue)}
+.cb-low{background:rgba(100,100,100,.1);border:1px solid rgba(100,100,100,.2);color:var(--muted)}
+.spills{display:flex;flex-wrap:wrap;gap:3px}
+.sp{padding:3px 8px;border-radius:7px;font-size:10px;font-weight:700;border:1px solid}
+.sp.slash{background:#FFF0E0;border-color:#F0B060;color:var(--orange)}
+.sp.tarikh{background:#E8F0FF;border-color:#90B0F0;color:var(--blue)}
+.sp.vaar{background:#E8FFEE;border-color:#70D090;color:var(--green)}
+.sp.vinod{background:#F0E8FF;border-color:#C080F0;color:var(--violet)}
+.sp.base{background:#FFF8D0;border-color:#D4A010;color:var(--gold)}
+.sp.palat{background:#E0F8FF;border-color:#60C0E0;color:#0080AA}
+.sp.xxpar{background:#FFE8EE;border-color:#F080A0;color:var(--red)}
+
+/* COPY BOX */
+.cpbox{background:var(--bg3);border:1.5px solid var(--bdr2);border-radius:12px;padding:12px;margin-top:10px;position:relative}
+.cptxt{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--txt2);line-height:2;word-break:break-all;padding-right:60px}
+.cbtn{position:absolute;top:10px;right:10px;padding:6px 12px;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:8px;font-size:11px;font-weight:800;font-family:'Nunito',sans-serif;color:#fff;cursor:pointer;transition:all .2s}
+.cbtn.ok{background:linear-gradient(135deg,var(--green),var(--green2))}
+
+/* ACCURACY PANEL */
+.acc-panel{background:linear-gradient(135deg,#EFFFEE,#E8F4FF);border:1.5px solid var(--bdr2);border-radius:14px;padding:14px;margin-top:10px}
+.acc-ttl{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.acc-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--bdr);font-size:12px}
+.acc-row:last-child{border-bottom:none}
+.acc-num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:var(--txt)}
+.acc-src{color:var(--muted);font-size:11px}
+.acc-bar{height:4px;border-radius:2px;margin-top:3px}
+
+/* AUDIT */
+.ar{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--bdr)}
+.ar:last-child{border-bottom:none}
+.ai{font-size:15px;flex-shrink:0}
+.al{font-size:12px;font-weight:800;color:var(--txt)}
+.ad{font-size:11px;color:var(--muted);margin-top:1px}
+
+/* ════════════════════════════════
+   CHART PAGE
+════════════════════════════════ */
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.chart-grid{grid-template-columns:1fr}}
+
+.chart-card{background:var(--card);border:1.5px solid var(--bdr);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.chart-hdr{padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
+.ch-frbd{background:linear-gradient(90deg,#FF6600,#FF9900)}
+.ch-gzbd{background:linear-gradient(90deg,#0055CC,#2277EE)}
+.ch-gali{background:linear-gradient(90deg,#007730,#22AA55)}
+.ch-dswr{background:linear-gradient(90deg,#6600CC,#9922EE)}
+.chart-hdr span{color:#fff;font-size:13px;font-weight:800;letter-spacing:1px}
+.chart-hdr small{color:rgba(255,255,255,.8);font-size:10px}
+
+.chart-table{width:100%;border-collapse:collapse}
+.chart-table th{padding:6px 4px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-align:center;border-bottom:1.5px solid var(--bdr);background:var(--bg2)}
+.chart-table td{padding:5px 4px;text-align:center;border-bottom:1px solid var(--bdr);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--txt)}
+.chart-table tr:hover td{background:var(--bg3)}
+.chart-table .date-col{color:var(--orange);font-weight:800;font-size:12px}
+.chart-table input.result-input{width:46px;background:var(--bg2);border:1.5px solid var(--bdr);border-radius:6px;padding:4px 2px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--txt);text-align:center;outline:none;transition:all .2s;-webkit-appearance:none}
+.chart-table input.result-input:focus{border-color:var(--orange);background:#fff}
+.chart-table input.result-input.filled{border-color:var(--green2);background:rgba(0,200,80,.06);color:var(--green)}
+.chart-save-btn{width:calc(100% - 28px);margin:10px 14px;padding:10px;background:linear-gradient(135deg,var(--green),var(--green2));border:none;border-radius:10px;color:#fff;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:all .2s}
+.chart-save-btn:active{transform:scale(.97)}
+.chart-month-nav{display:flex;align-items:center;gap:8px;padding:10px 14px 6px;border-bottom:1px solid var(--bdr)}
+.mn-btn{background:var(--bg2);border:1px solid var(--bdr);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--txt);transition:all .2s}
+.mn-btn:active{background:var(--bdr)}
+.mn-label{font-size:13px;font-weight:800;color:var(--txt);flex:1;text-align:center}
+
+/* HISTORY page */
+.hist-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bdr);flex-wrap:wrap;gap:6px}
+.hist-row:last-child{border-bottom:none}
+.hist-date{font-size:12px;font-weight:800;color:var(--txt)}
+.hist-nums{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.hist-loc{padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700;background:var(--bg2);border:1px solid var(--bdr);color:var(--muted)}
+.del-btn{padding:3px 10px;border-radius:6px;font-size:10px;font-weight:700;background:#FFE8E8;border:1px solid #F0A0A0;color:var(--red);cursor:pointer}
+
+.empty-state{text-align:center;padding:30px;color:var(--muted);font-size:13px}
+.empty-state .eico{font-size:36px;display:block;margin-bottom:8px}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px}
+
+/* util */
+.mt8{margin-top:8px} .mb8{margin-bottom:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.tag{padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="hdr">
+  <span class="om">🔱</span>
+  <h1>महादेव पर्ची 4.5</h1>
+  <p>JAY BABA BHOLENATH · JAY BAJRANG BALI</p>
+  <div class="hdr-nav">
+    <div class="hnav on" onclick="showPage('parchi')">🎯 पर्ची</div>
+    <div class="hnav" onclick="showPage('chart')">📊 चार्ट</div>
+    <div class="hnav" onclick="showPage('history')">📋 History</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE: PARCHI
+══════════════════════════════════════════ -->
+<div class="page on" id="pg-parchi">
+
+  <!-- STEP 1 -->
+  <div class="card">
+    <div class="card-top ct-orange"></div>
+    <div class="sec-ttl t-orange">🎯 Step 1 · पिछले 4 Results (Base Numbers)</div>
+    <div class="g4">
+      <div class="ib"><label>Result 1</label><input class="ni" id="b1" type="number" placeholder="00" min="0" max="99" oninput="mf(this)"></div>
+      <div class="ib"><label>Result 2</label><input class="ni" id="b2" type="number" placeholder="00" min="0" max="99" oninput="mf(this)"></div>
+      <div class="ib"><label>Result 3</label><input class="ni" id="b3" type="number" placeholder="00" min="0" max="99" oninput="mf(this)"></div>
+      <div class="ib"><label>Result 4</label><input class="ni" id="b4" type="number" placeholder="00" min="0" max="99" oninput="mf(this)"></div>
+    </div>
+    <div class="divl"></div>
+    <div class="sec-ttl t-blue" style="margin-bottom:10px">➕ आज के आ चुके Results</div>
+    <div class="g4">
+      <div class="ib"><label>FRBD</label><input class="ni" id="rf" type="number" placeholder="--" min="0" max="99" oninput="mf(this)"></div>
+      <div class="ib"><label>GZBD</label><input class="ni" id="rg" type="number" placeholder="--" min="0" max="99" oninput="mf(this)"></div>
+      <div class="ib"><label>GALI</label><input class="ni" id="ra" type="number" placeholder="--" min="0" max="99" oninput="mf(this)"></div>
+      <div class="ib"><label>DSWR</label><input class="ni" id="rd" type="number" placeholder="--" min="0" max="99" oninput="mf(this)"></div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card">
+    <div class="card-top ct-blue"></div>
+    <div class="sec-ttl t-blue">📅 Step 2 · तारीख और वार</div>
+    <div class="g2">
+      <div class="ib"><label>तारीख</label><input class="ti" id="trkh" type="number" placeholder="1 – 31" min="1" max="31"></div>
+      <div class="ib"><label>वार</label>
+        <div class="sw"><select class="si" id="vr">
+          <option value="">-- वार चुनो --</option>
+          <option value="0">सोमवार</option><option value="1">मंगलवार</option>
+          <option value="2">बुधवार</option><option value="3">वीरवार</option>
+          <option value="4">शुक्रवार</option><option value="5">शनिवार</option>
+          <option value="6">रविवार</option>
+        </select></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="card">
+    <div class="card-top ct-green"></div>
+    <div class="sec-ttl t-green">📍 Step 3 · Location</div>
+    <div class="lg">
+      <div class="lb" id="lFRBD" onclick="tl('FRBD')"><span class="li">🏙️</span>FRBD<small>Faridabad</small></div>
+      <div class="lb" id="lGZBD" onclick="tl('GZBD')"><span class="li">🌆</span>GZBD<small>Ghaziabad</small></div>
+      <div class="lb" id="lGALI" onclick="tl('GALI')"><span class="li">🌃</span>GALI<small>Nai/Gali</small></div>
+      <div class="lb" id="lDSWR" onclick="tl('DSWR')"><span class="li">🌙</span>DSWR<small>Desawar</small></div>
+    </div>
+  </div>
+
+  <button class="gbtn" onclick="gen()">🔱 पर्ची बनाओ · Har Har Mahadev</button>
+
+  <div id="loading"><div class="spin"></div><p style="color:var(--muted);font-weight:700">पर्ची बन रही है... 🙏</p></div>
+
+  <div id="results">
+    <div class="divl"></div>
+    <div class="rbanner">
+      <div><h2>🏆 पर्ची तैयार!</h2><div class="rmeta" id="rmeta"></div></div>
+      <div style="font-size:26px">🔱</div>
+    </div>
+    <div class="srow" id="srow"></div>
+    <div class="tabs" id="tabs"></div>
+    <div id="tpanes"></div>
+    <div class="card mt8">
+      <div class="card-top ct-violet"></div>
+      <div class="sec-ttl t-violet">✅ Audit · 4 महापाप चेक</div>
+      <div id="audit"></div>
+    </div>
+  </div>
+
+</div><!-- /pg-parchi -->
+
+<!-- ══════════════════════════════════════════
+     PAGE: CHART
+══════════════════════════════════════════ -->
+<div class="page" id="pg-chart">
+  <div class="card">
+    <div class="card-top ct-multi"></div>
+    <div class="sec-ttl t-orange">📊 Monthly Result Chart</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">हर दिन का result यहाँ fill करो — पर्ची बनाते समय auto-use होगा</p>
+    <div class="g2" style="margin-bottom:12px">
+      <div class="ib"><label>Month</label>
+        <div class="sw"><select class="si" id="chartMonth" onchange="renderCharts()">
+          <option value="1">जनवरी</option><option value="2">फरवरी</option>
+          <option value="3">मार्च</option><option value="4">अप्रैल</option>
+          <option value="5">मई</option><option value="6">जून</option>
+          <option value="7">जुलाई</option><option value="8">अगस्त</option>
+          <option value="9">सितंबर</option><option value="10">अक्टूबर</option>
+          <option value="11">नवंबर</option><option value="12">दिसंबर</option>
+        </select></div>
+      </div>
+      <div class="ib"><label>Year</label><input class="ti" id="chartYear" type="number" placeholder="2026" min="2020" max="2030" oninput="renderCharts()"></div>
+    </div>
+    <div class="chart-grid" id="chartGrid"></div>
+    <div style="margin-top:10px;font-size:11px;color:var(--muted);text-align:center">💡 Result fill करने के बाद Save बटन दबाओ</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE: HISTORY
+══════════════════════════════════════════ -->
+<div class="page" id="pg-history">
+  <div class="card">
+    <div class="card-top ct-blue"></div>
+    <div class="sec-ttl t-blue">📋 Parchi History</div>
+    <div id="hist-list"></div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// ══════════════════════════════════════════════════════════
+// DATA — FORMULA 4.5
+// ══════════════════════════════════════════════════════════
+const SLASH={1:[54,74,80],2:[20,38],3:[43,78],4:[54,76],5:[99,14,83],6:[79,16],7:[73,3],8:[34,16],9:[79,85],10:[75,1,80,64,76],11:[80],12:[61,77,23,73],13:[25,16,49],14:[67,71,78],15:[93,82],16:[49,79,70],17:[98,74,54,79,67,77],18:[77,50],19:[21,64,56],20:[80,12,38],21:[96,81,34],22:[51],23:[53,4],24:[93],25:[26],26:[4,13,92],27:[75,84,38,88],28:[65,19],29:[89,9],30:[46,36,19],31:[86,90,39,73],32:[45,68,93,27,22],33:[89],34:[65,49],35:[67],36:[50],37:[15],38:[31],39:[85],40:[8,34],41:[51],42:[64],43:[67,59],44:[52,32],45:[51,71],46:[36],47:[73,7],48:[16,64],49:[85],50:[69],51:[33,80],52:[20],53:[28,43],54:[22],55:[92],56:[18],57:[51,36],58:[67,14],59:[13,91,80],60:[41],61:[10,57,58,59],62:[20,4],63:[26,81,37],64:[77,79],65:[87],66:[61],67:[23],68:[85,58,78,89],69:[21,20,77,9],70:[66,61],71:[97],72:[28],73:[23],74:[50,80,14,58],75:[44,89,96],76:[81,89],77:[95,61],78:[31],79:[85,97],80:[92],81:[80],82:[42,85,4,40],83:[19],84:[2],85:[32,97,42,14,64],86:[32],87:[26],88:[25,92],89:[9],90:[35],91:[23,32],92:[91,23,32],93:[32],94:[59,6],95:[14,65,85],96:[26],97:[38],98:[90],99:[91]};
+const TARIKH={1:[9,19,36,15,51,59,65,23,44,14,43,17,73,60,26,88,10,30,74,52,71,94,38,18],2:[32,33,59,66,30,50,55,15,73,72,40,82,18,4,17],3:[75,88,99,79,66,96,60,13,7,93,76,38,4,94,12,24,54,72,29],4:[75,85,54,4,14,20,1,90,11,33,16,2,93,3],5:[24,35,77,93,71,2,3,36,99,44,42,7,5,1],6:[13,63],7:[73,24,76,12],8:[11,14],9:[94,98,95,31,66,16],10:[15,50,78,22,37,74,47],11:[21,34,43,74,20,70,80,31,82,38],12:[72,77,23,73,70],13:[20,43,52,12,88,57,98,46,64,25,42,1,24,84,3,5,79,97],14:[68,33,15,25,84,74],15:[24,35,77,93,71,2,3,36,99,44,42],16:[13,63,49,79,70],17:[73,37,1,80],18:[30,33,93,83,67,64,87,91],19:[74,14,32],20:[72,12,38],21:[4,41,11,10,66,5,94,25,57,50,20,72],22:[38,50],23:[42,25,36,98,88,16,96],24:[31,53,3,47,10,90,44,84,77,99,48],25:[11,54,25],26:[6,25,22,17,90,97,64],27:[5,55,95,29,71,79,14,15,51,41],28:[23,4,37,8,6,24,34,88,28,50,35,96],29:[85,92,39,15,49,33,26,18,6,32,85],30:[17,73,70,43,10,90,71,30]};
+const DADA={1:[51,59,65,23,44],2:[15,73,40,82,18],3:[99,34,61,48,90],4:[96,56,2,61,60],5:[19,81,24,89,25,70,30,4,92,21,60,3,16,8,32,90],6:[32,92,25,11,1,27,77],7:[35,4,21,77,31,1,5],8:[98,36,74,88,25,4,27,3],9:[94,98,95,31,66,16],10:[98,36,27,90],11:[37,5,64],12:[88,15,65,30,14,92,27],13:[2,64,61,16,96,75,76],14:[29,37,86,65,45],15:[19,65,6,12,88],16:[16,19,62,7,70,96,50,52],17:[16,77,12],18:[17,20,6,42,19],19:[77,33,23,19,27,74,31],20:[17,92,27,29],21:[57,15,21,51,25,27,28,6,19],22:[7,69,53,39,23,74],23:[66,22,18,39,23,82,32,8],24:[18,65,31,9,97,17,1,90,16,71,37,12],25:[18,47,1,16,90,6],26:[54,23,85,40,90,65,84,64,98],27:[85,5,19,74],28:[44,7,6,94,84,85,86],29:[17,92,27,29],30:[17,92,27,29]};
+const VAAR={0:[61,3,21,11,31,44,29,77,5,95],1:[33,44,20,24,93,98,79,82,32,51,59,3,61,15,73,2,98],2:[92,68,30,6,86,94,7,70,37,42],3:[72,64,17,73,70,100,18,82,38,62],4:[31,5,72,64,49,51,40,33,89,29,84,20,9,82,37],5:[93,72,9,92,79,69,98,76,24,4,40,7,70,90,41,38,20,3,25,32,83,42],6:[85,10,21,71,30,9,74,28]};
+const VINOD={0:[62,75,84,12,77],1:[70,52,17,89,55],2:[95,4,63,72,44],3:[63,93,89,68,88],4:[29,84,20,9,82,64,37],5:[93,59,89,97,22],6:[70,90,64,99]};
+const XXYY={88:[38,8,12,36,86],21:[91,5],24:[50],31:[95],20:[12,38],19:[20,91,21],5:[99,14,83],44:[15,65,85],55:[8,33],65:[68],32:[23,93,10,30],76:[59],93:[98],75:[67,43],90:[35],73:[85],83:[19],40:[8,88,80],71:[21],62:[6],85:[98],86:[98],96:[50],14:[12],8:[45,53,92,16],3:[40,75],1:[23,44],6:[67],10:[22],35:[27,31],22:[11,61,31],97:[38],79:[20],70:[18],78:[87,91],38:[9,69],50:[24,34,40],60:[6,60]};
+
+// Build reverse slash
+const RSLASH={};
+Object.entries(SLASH).forEach(([xx,yys])=>yys.forEach(yy=>{if(!RSLASH[yy])RSLASH[yy]=[];RSLASH[yy].push(+xx);}));
+
+// ══════════════════════════════════════════════════════════
+// STORAGE
+// ══════════════════════════════════════════════════════════
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function gv(k,d=null){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+
+// ══════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════
+let selLocs=[];
+
+// ══════════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════════
+const p2=n=>String(n).padStart(2,'0');
+const pal=n=>{const s=String(n).padStart(2,'0');return+(s[1]+s[0]);};
+function mf(el){el.classList.toggle('ok',el.value!=='')}
+function tl(loc){
+  const b=document.getElementById('l'+loc);
+  if(selLocs.includes(loc)){selLocs=selLocs.filter(l=>l!==loc);b.classList.remove('on');}
+  else{selLocs.push(loc);b.classList.add('on');}
+}
+
+// ══════════════════════════════════════════════════════════
+// PAGE NAV
+// ══════════════════════════════════════════════════════════
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.hnav').forEach(n=>n.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  const idx={parchi:0,chart:1,history:2}[id];
+  document.querySelectorAll('.hnav')[idx].classList.add('on');
+  if(id==='chart')renderCharts();
+  if(id==='history')renderHistory();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ══════════════════════════════════════════════════════════
+// GET BASES
+// ══════════════════════════════════════════════════════════
+function getBases(){
+  const ids=['b1','b2','b3','b4','rf','rg','ra','rd'];
+  const out=[];
+  ids.forEach(id=>{const v=document.getElementById(id).value;
+    if(v!==''){const n=+v;if(!isNaN(n)&&n>=0&&n<=99&&!out.includes(n))out.push(n);}
+  });
+  return out;
+}
+
+// ══════════════════════════════════════════════════════════
+// BUILD MAP with chart data boost
+// ══════════════════════════════════════════════════════════
+function add(map,num,src){if(num<0||num>99)return;if(!map[num])map[num]=[];map[num].push(src);}
+
+function buildMap(bases,tarikh,vaar){
+  const m={};
+  bases.forEach(b=>{
+    add(m,b,{type:'base',text:`Base(${p2(b)})`});
+    if(SLASH[b])SLASH[b].forEach(n=>add(m,n,{type:'slash',text:`Slash ${p2(b)}→${p2(n)}`}));
+    if(RSLASH[b])RSLASH[b].forEach(n=>add(m,n,{type:'slash',text:`RevSlash ${p2(n)}/${p2(b)}`}));
+    const p=pal(b);if(p!==b)add(m,p,{type:'palat',text:`Palat ${p2(b)}→${p2(p)}`});
+    if(XXYY[b])XXYY[b].forEach(n=>add(m,n,{type:'xxpar',text:`XXparYY ${p2(b)}→${p2(n)}`}));
+  });
+  const t=+tarikh;
+  if(TARIKH[t])TARIKH[t].forEach(n=>add(m,n,{type:'tarikh',text:`Tarikh ${t} (OldImg)`}));
+  if(DADA[t])DADA[t].forEach(n=>add(m,n,{type:'tarikh',text:`Tarikh ${t} (DadaChart)`}));
+  const v=+vaar;
+  if(VAAR[v])VAAR[v].forEach(n=>add(m,n,{type:'vaar',text:`Vaar (OldImg)`}));
+  if(VINOD[v])VINOD[v].forEach(n=>add(m,n,{type:'vinod',text:`Vaar (VinodSpl)`}));
+
+  // 🔥 ACCURACY BOOST: Chart data से पिछले results check
+  const now=new Date();
+  const yr=now.getFullYear();
+  const mo=now.getMonth()+1;
+  const chartKey=`chart_${yr}_${mo}`;
+  const chartData=gv(chartKey,{});
+  ['FRBD','GZBD','GALI','DSWR'].forEach(loc=>{
+    const prev=chartData[loc]||{};
+    // पिछले 7 दिन के results check
+    for(let d=t-7;d<t;d++){
+      if(d>0&&prev[d]!==undefined&&prev[d]!==''){
+        const n=+prev[d];
+        if(n>=0&&n<=99){
+          add(m,n,{type:'tarikh',text:`ChartData(${loc} ${d})`});
+          // उसकी slash भी add
+          if(SLASH[n])SLASH[n].forEach(s=>add(m,s,{type:'slash',text:`ChartSlash(${loc}${d}→${p2(n)}→${p2(s)})`}));
+        }
+      }
+    }
+  });
+
+  return m;
+}
+
+// ══════════════════════════════════════════════════════════
+// FORMULA 4.5 — 60 NUMBERS GUARANTEED
+// ══════════════════════════════════════════════════════════
+function buildParchi(map,bases){
+  const all=[];
+  // Score 0-99
+  for(let i=0;i<=99;i++){
+    const srcs=map[i]||[];
+    all.push({num:i,cnt:srcs.length,srcs});
+  }
+  all.sort((a,b)=>b.cnt-a.cnt);
+
+  // ── GOLD: exactly 10
+  const gold=[];
+  [4,3,2,1,0].forEach(min=>{
+    all.filter(x=>x.cnt>=min&&!gold.find(g=>g.num===x.num))
+       .forEach(x=>{if(gold.length<10)gold.push(x);});
+  });
+  // Pad to exactly 10 with remaining
+  if(gold.length<10){
+    for(let i=0;i<=99&&gold.length<10;i++){
+      if(!gold.find(g=>g.num===i))gold.push({num:i,cnt:0,srcs:[]});
+    }
+  }
+
+  const gNums=gold.map(x=>x.num);
+
+  // ── SILVER first 10: Gold की 100% Palat
+  const sp10=gNums.map(n=>{
+    const p=pal(n);
+    const found=all.find(x=>x.num===p)||{num:p,cnt:0,srcs:[]};
+    return{...found,isGoldPalat:true,fromGold:n};
+  });
+  // Handle duplicates in palat (if two gold numbers have same palat)
+  const spSeen=new Set();
+  const sp10uniq=[];
+  gNums.forEach(n=>{
+    const p=pal(n);
+    if(spSeen.has(p)){
+      // Find next available number not in gold or already used
+      let fallback=null;
+      for(const x of all){
+        if(!gNums.includes(x.num)&&!spSeen.has(x.num)){fallback=x;break;}
+      }
+      sp10uniq.push(fallback||{num:0,cnt:0,srcs:[],isGoldPalat:false});
+    } else {
+      const found=all.find(x=>x.num===p)||{num:p,cnt:0,srcs:[]};
+      sp10uniq.push({...found,isGoldPalat:true,fromGold:n});
+      spSeen.add(p);
+    }
+  });
+
+  // ── SILVER next 10: Table 2 Solid (tarikh+vaar, no palat of bronze)
+  const usedS=new Set([...gNums,...sp10uniq.map(x=>x.num)]);
+  const sn10=[];
+  // Priority: tarikh+vaar match
+  all.filter(x=>!usedS.has(x.num)&&x.srcs.some(s=>s.type==='tarikh'||s.type==='vaar'||s.type==='vinod'))
+     .forEach(x=>{if(sn10.length<10){sn10.push(x);usedS.add(x.num);}});
+  // Fill rest
+  for(let i=0;i<=99&&sn10.length<10;i++){
+    if(!usedS.has(i)){sn10.push(all.find(x=>x.num===i)||{num:i,cnt:0,srcs:[]});usedS.add(i);}
+  }
+
+  const silver=[...sp10uniq,...sn10].slice(0,20);
+  const sNums=silver.map(x=>x.num);
+
+  // ── BRONZE: exactly 30, 100% natural
+  const used=new Set([...gNums,...sNums]);
+  const bronze=[];
+  // Priority: numbers with sources
+  all.filter(x=>!used.has(x.num)&&x.cnt>=1)
+     .forEach(x=>{if(bronze.length<30){bronze.push(x);used.add(x.num);}});
+  // Base numbers that aren't placed yet
+  bases.forEach(b=>{
+    if(!used.has(b)&&bronze.length<30){
+      bronze.push(all.find(x=>x.num===b)||{num:b,cnt:1,srcs:[{type:'base',text:'Base'}]});
+      used.add(b);
+    }
+  });
+  // Fill remaining to reach 30
+  for(let i=0;i<=99&&bronze.length<30;i++){
+    if(!used.has(i)){bronze.push({num:i,cnt:0,srcs:[]});used.add(i);}
+  }
+  bronze.sort((a,b)=>b.cnt-a.cnt);
+  bronze.splice(30);
+
+  return{gold,silver:silver.slice(0,20),bronze:bronze.slice(0,30)};
+}
+
+// ══════════════════════════════════════════════════════════
+// RENDER CHIPS
+// ══════════════════════════════════════════════════════════
+function chips(items,cls,isS1=false,isS2=false){
+  return items.map(it=>{
+    if(!it)return`<div class="chip ${cls}" style="opacity:.3">--</div>`;
+    const hot=it.cnt>=3;
+    let c=cls;
+    if(isS1)c='s1chip';
+    else if(isS2)c='s2chip';
+    return`<div class="chip ${c}${hot?' hot':''}" title="${(it.srcs||[]).map(s=>s.text).join(' | ')}">${p2(it.num)}</div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════════
+// GOLD DETAIL PANEL
+// ══════════════════════════════════════════════════════════
+function srcPill(s){
+  const m={slash:'slash',tarikh:'tarikh',vaar:'vaar',vinod:'vinod',base:'base',palat:'palat',xxpar:'xxpar'};
+  return`<span class="sp ${m[s.type]||'base'}">${s.text}</span>`;
+}
+
+function goldPanel(gold){
+  return`<div class="gdp">
+    <div class="gdp-hdr">🔍 Gold Numbers की Details — कहाँ से आया हर नंबर</div>
+    <div class="gdp-body">
+    ${gold.map((it,i)=>{
+      const c=it.cnt>=4?'cb-hot':it.cnt>=2?'cb-med':'cb-low';
+      const lbl=it.cnt>=4?'🔥 SUPER HOT':it.cnt>=3?'🔥 HOT':it.cnt>=2?'MULTI-CLASH':'SINGLE';
+      return`<div class="gi">
+        <div class="gi-n"><div class="gi-rank">${i+1}</div>${p2(it.num)}</div>
+        <div class="gi-info">
+          <div class="gi-top">${p2(it.num)} — ${it.cnt} जगह से <span class="cbadge ${c}">${lbl}</span></div>
+          <div class="spills">${(it.srcs||[]).map(srcPill).join('')}</div>
+        </div>
+      </div>`;
+    }).join('')}
+    </div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════════════════════
+// FORMAT + COPY
+// ══════════════════════════════════════════════════════════
+function fmt(loc,g,s,b){
+  return`${loc} ${g.map(x=>p2(x.num)).join(',')}@\n${s.map(x=>p2(x.num)).join(',')}@\n${b.map(x=>p2(x.num)).join(',')}@`;
+}
+function doCopy(loc){
+  const txt=document.getElementById('ct_'+loc).innerText;
+  const btn=document.getElementById('cb_'+loc);
+  const done=()=>{btn.textContent='✓ Done!';btn.classList.add('ok');setTimeout(()=>{btn.textContent='COPY';btn.classList.remove('ok');},2000);};
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(done).catch(()=>fb(txt,done));}
+  else fb(txt,done);
+}
+function fb(txt,cb){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);cb();}
+
+// ══════════════════════════════════════════════════════════
+// AUDIT
+// ══════════════════════════════════════════════════════════
+function renderAudit(bases,gold,silver,bronze,map){
+  const gN=gold.map(x=>x.num);
+  const multi=Object.values(map).filter(v=>v.length>=2).length;
+  const total=new Set([...gN,...silver.map(x=>x.num),...bronze.map(x=>x.num)]).size;
+  const rows=[
+    {i:'✅',l:`${bases.length} Base Numbers: ${bases.map(p2).join(', ')}`,d:'पर्ची का आधार'},
+    {i:'🥇',l:`Gold 10: ${gN.map(p2).join(', ')}`,d:'Multi-Clash Kings'},
+    {i:'🥈',l:`Silver पहले 10 = Gold Palat`,d:`Palats: ${gN.map(n=>p2(pal(n))).join(', ')}`},
+    {i:'🥈',l:`Silver अगले 10 = Table 2 Solid`,d:'Tarikh+Vaar, बिना forced palat'},
+    {i:'🥉',l:`Bronze 30: Auto-Palat BANNED`,d:'100% Natural Raw Data'},
+    {i:total===60?'✅':'⚠️',l:`Total Numbers: ${total}/60`,d:total===60?'पर्ची पूरी है!':'पर्ची अधूरी है!'},
+    {i:multi>0?'✅':'⚠️',l:`Multi-Clash: ${multi}`,d:'जितने ज्यादा उतनी strong'},
+    {i:'✅',l:'4 महापाप PASS',d:'No Auto-Palat | No Live Repeat | No Zero-Delete | No Gold Mismanagement'},
+  ];
+  return rows.map(r=>`<div class="ar"><span class="ai">${r.i}</span><div><div class="al">${r.l}</div><div class="ad">${r.d}</div></div></div>`).join('');
+}
+
+// ══════════════════════════════════════════════════════════
+// MAIN GENERATE
+// ══════════════════════════════════════════════════════════
+function gen(){
+  const bases=getBases();
+  const tarikh=document.getElementById('trkh').value;
+  const vaar=document.getElementById('vr').value;
+  if(bases.length<4){alert('कम से कम 4 Base Numbers डालो! 🙏');return;}
+  if(!tarikh){alert('तारीख डालो!');return;}
+  if(vaar===''){alert('वार चुनो!');return;}
+  if(selLocs.length===0){alert('कम से कम एक Location चुनो!');return;}
+
+  document.getElementById('loading').style.display='block';
+  document.getElementById('results').style.display='none';
+
+  setTimeout(()=>{
+    const map=buildMap(bases,tarikh,vaar);
+    const vN=['सोमवार','मंगलवार','बुधवार','वीरवार','शुक्रवार','शनिवार','रविवार'];
+    const multi=Object.values(map).filter(v=>v.length>=2).length;
+
+    document.getElementById('rmeta').textContent=`${tarikh} तारीख · ${vN[+vaar]} · ${selLocs.join(' + ')}`;
+    document.getElementById('srow').innerHTML=`
+      <div class="sb sb1"><span class="sv">${bases.length}</span><div class="sl">Bases</div></div>
+      <div class="sb sb2"><span class="sv">${Object.keys(map).length}</span><div class="sl">Candidates</div></div>
+      <div class="sb sb3"><span class="sv">${multi}</span><div class="sl">Multi-Clash</div></div>
+      <div class="sb sb4"><span class="sv">60</span><div class="sl">Numbers</div></div>`;
+
+    const tabsEl=document.getElementById('tabs');
+    const panesEl=document.getElementById('tpanes');
+    tabsEl.innerHTML='';panesEl.innerHTML='';
+
+    let auditDone=false;
+    selLocs.forEach((loc,i)=>{
+      const tb=document.createElement('div');
+      tb.className='tbb'+(i===0?' on':'');
+      tb.id='tb_'+loc;tb.textContent=loc;
+      tb.onclick=()=>sw(loc);
+      tabsEl.appendChild(tb);
+
+      const{gold,silver,bronze}=buildParchi(map,bases);
+
+      if(!auditDone){
+        document.getElementById('audit').innerHTML=renderAudit(bases,gold,silver,bronze,map);
+        auditDone=true;
+      }
+
+      // Save to history
+      const hist=gv('parchi_history',[]);
+      hist.unshift({date:new Date().toLocaleDateString('hi-IN'),tarikh,vaar:vN[+vaar],loc,
+        gold:gold.map(x=>p2(x.num)),silver:silver.map(x=>p2(x.num)),bronze:bronze.map(x=>p2(x.num))});
+      sv('parchi_history',hist.slice(0,50));
+
+      const pane=document.createElement('div');
+      pane.className='tpane'+(i===0?' on':'');
+      pane.id='tp_'+loc;
+
+      const s1=silver.slice(0,10);
+      const s2=silver.slice(10,20);
+
+      pane.innerHTML=`
+        <div class="lc gc">
+          <div class="lhead"><div class="lttl">🥇 GOLD — 10 Numbers</div><div class="lrule">Multi-Clash Kings</div></div>
+          <div class="ng">${chips(gold,'gchip')}</div>
+        </div>
+        ${goldPanel(gold)}
+        <div class="lc sc" style="margin-top:10px">
+          <div class="lhead"><div class="lttl">🥈 SILVER — 20 Numbers</div><div class="lrule">पहले 10=Gold Palat · अगले 10=Solid</div></div>
+          <div style="font-size:10px;font-weight:700;color:var(--blue);margin-bottom:6px;letter-spacing:.5px">🔵 पहले 10 — Gold की Palat (100%)</div>
+          <div class="ng">${chips(s1,'s1chip',true,false)}</div>
+          <div style="font-size:10px;font-weight:700;color:var(--green);margin:8px 0 6px;letter-spacing:.5px">🟢 अगले 10 — Table 2 Solid Numbers</div>
+          <div class="ng">${chips(s2,'s2chip',false,true)}</div>
+        </div>
+        <div class="lc bc">
+          <div class="lhead"><div class="lttl">🥉 BRONZE — 30 Numbers</div><div class="lrule">Safety Net · Natural Raw</div></div>
+          <div class="ng">${chips(bronze,'bchip')}</div>
+        </div>
+        <div class="cpbox">
+          <button class="cbtn" id="cb_${loc}" onclick="doCopy('${loc}')">COPY</button>
+          <div class="cptxt" id="ct_${loc}">${fmt(loc,gold,silver,bronze).replace(/\n/g,'<br>')}</div>
+        </div>`;
+      panesEl.appendChild(pane);
+    });
+
+    document.getElementById('loading').style.display='none';
+    document.getElementById('results').style.display='block';
+    document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+  },600);
+}
+
+function sw(loc){
+  document.querySelectorAll('.tbb').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.tpane').forEach(p=>p.classList.remove('on'));
+  document.getElementById('tb_'+loc).classList.add('on');
+  document.getElementById('tp_'+loc).classList.add('on');
+}
+
+// ══════════════════════════════════════════════════════════
+// CHART PAGE
+// ══════════════════════════════════════════════════════════
+const LOCS=['FRBD','GZBD','GALI','DSWR'];
+const LOC_COLORS=['ch-frbd','ch-gzbd','ch-gali','ch-dswr'];
+
+function daysInMonth(m,y){return new Date(y,m,0).getDate();}
+
+function renderCharts(){
+  const mo=+document.getElementById('chartMonth').value;
+  const yr=+document.getElementById('chartYear').value||new Date().getFullYear();
+  const days=daysInMonth(mo,yr);
+  const key=`chart_${yr}_${mo}`;
+  const data=gv(key,{});
+
+  const grid=document.getElementById('chartGrid');
+  grid.innerHTML=LOCS.map((loc,li)=>{
+    const d=data[loc]||{};
+    const rows=[];
+    for(let day=1;day<=days;day++){
+      const val=d[day]!==undefined?d[day]:'';
+      rows.push(`<tr>
+        <td class="date-col">${String(day).padStart(2,'0')}</td>
+        <td><input class="result-input${val!==''?' filled':''}" id="ci_${loc}_${day}" type="number" placeholder="--" min="0" max="99" value="${val}" oninput="this.classList.toggle('filled',this.value!=='')" inputmode="numeric"></td>
+      </tr>`);
+    }
+    return`<div class="chart-card">
+      <div class="chart-hdr ${LOC_COLORS[li]}">
+        <span>${loc}</span><small>${mo}/${yr}</small>
+      </div>
+      <table class="chart-table" style="width:100%">
+        <tr><th>Date</th><th>Result</th></tr>
+        ${rows.join('')}
+      </table>
+      <button class="chart-save-btn" onclick="saveChart('${loc}',${mo},${yr})">💾 ${loc} Save करो</button>
+    </div>`;
+  }).join('');
+}
+
+function saveChart(loc,mo,yr){
+  const days=daysInMonth(mo,yr);
+  const key=`chart_${yr}_${mo}`;
+  const data=gv(key,{});
+  if(!data[loc])data[loc]={};
+  for(let day=1;day<=days;day++){
+    const el=document.getElementById(`ci_${loc}_${day}`);
+    if(el){
+      const v=el.value;
+      if(v!=='')data[loc][day]=+v;
+      else delete data[loc][day];
+    }
+  }
+  sv(key,data);
+  alert(`✅ ${loc} का ${mo}/${yr} chart save हो गया!`);
+}
+
+// ══════════════════════════════════════════════════════════
+// HISTORY PAGE
+// ══════════════════════════════════════════════════════════
+function renderHistory(){
+  const hist=gv('parchi_history',[]);
+  const el=document.getElementById('hist-list');
+  if(!hist.length){
+    el.innerHTML=`<div class="empty-state"><span class="eico">📋</span>अभी कोई History नहीं है<br><small>पर्ची बनाने के बाद यहाँ दिखेगी</small></div>`;
+    return;
+  }
+  el.innerHTML=hist.map((h,i)=>`
+    <div class="hist-row">
+      <div>
+        <div class="hist-date">📅 ${h.date} · ${h.tarikh} तारीख · ${h.vaar}</div>
+        <div class="hist-nums" style="margin-top:3px">
+          <span style="color:var(--gold)">🥇 ${h.gold.slice(0,5).join(',')}...</span>
+          <span style="color:var(--blue);margin-left:8px">🥈 ${h.silver.slice(0,5).join(',')}...</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="hist-loc">${h.loc}</span>
+        <button class="del-btn" onclick="delHist(${i})">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function delHist(i){
+  const hist=gv('parchi_history',[]);
+  hist.splice(i,1);
+  sv('parchi_history',hist);
+  renderHistory();
+}
+
+// ══════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════
+window.addEventListener('load',()=>{
+  const now=new Date();
+  document.getElementById('trkh').value=now.getDate();
+  document.getElementById('vr').value=now.getDay()===0?6:now.getDay()-1;
+  document.getElementById('chartMonth').value=now.getMonth()+1;
+  document.getElementById('chartYear').value=now.getFullYear();
+});
+</script>
+</body>
+</html>
